@@ -8,9 +8,14 @@
     background:brown;
     width:100%;
     bottom:0;
+    z-index:-100;
 }
-.tool{
-    
+.tool, .toolTarget{
+    position:absolute;    
+}
+.toolTarget{
+    border: solid 1px white;
+    border-style:dashed;
 }
 #instruction{
     text-align:center;
