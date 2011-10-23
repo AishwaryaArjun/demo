@@ -16,22 +16,8 @@
 .toolTarget{
     border: solid 1px white;
     border-style:dashed;
+    z-index:-50;
 }
 #instruction{
     text-align:center;
-}
-.draggable {
-    position: absolute;
-    left: 30px;
-    top: 30px;
-    width: 60px;
-    height: 60px;
-    margin-left: -30px;
-    margin-top: -30px;
-
-    color: #FFF;
-    font: bold 16px Helvetica,Arial,Sans-serif;
-    text-align: center;
-    background-color: #ABF;
-    border: 3px solid #669;
 }

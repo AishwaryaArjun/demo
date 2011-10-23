@@ -1,14 +1,29 @@
 cooking.moveMe = function(e) {
     e.preventDefault();
     var orig = e.originalEvent;
+    var top = parseInt(orig.changedTouches[0].pageY);     
+    var left = parseInt(orig.changedTouches[0].pageX);
+
+    var topStop = this.getAttribute('topStop'); 
+    var minTopStop = 0.98 * parseInt(topStop);
+    var maxTopStop = 1.02 * parseInt(topStop);
+
+    var leftStop = this.getAttribute('leftStop'); 
+    var minLeftStop = 0.98 * parseInt(leftStop);
+    var maxLeftStop = 1.02 * parseInt(leftStop);
+    
     $(this).css({
-      top: orig.changedTouches[0].pageY,
-      left: orig.changedTouches[0].pageX
+      top: top + 'px',
+      left: left + 'px'
     });
+    console.log(left);
+    console.log(minLeftStop);
+    if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
+        alert('bingo');
+    }
 };
 
 cooking.displayLevel = function(recipe,step){ 
-  
     document.getElementById('instruction').innerHTML = recipe.steps[step].instruction;
 
     tools = recipe.steps[step].tools;
@@ -23,6 +38,8 @@ cooking.displayLevel = function(recipe,step){
         toolEl.style.left = tools[i].start.x + '%';  
         toolEl.style.width = tools[i].size.x + "%" ;  
         toolEl.style.height = tools[i].size.y + '%';
+        toolEl.setAttribute('topStop',(tools[i].stop.y / 100 * window.innerHeight) + 'px');  
+        toolEl.setAttribute('leftStop',(tools[i].stop.x / 100 * window.innerWidth) + 'px');  
         toolEl.addEventListener('click',cooking.moveMe);  
         document.body.appendChild(toolEl);
 
@@ -41,8 +58,5 @@ cooking.displayLevel = function(recipe,step){
 }
 
 cooking.gameStart = (function(){ 
-    cooking.viewportwidth = window.innerWidth,
-    cooking.viewportheight = window.innerHeight
-
     cooking.displayLevel(cooking.recipe1,0);
 })();

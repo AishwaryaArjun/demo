@@ -6,6 +6,7 @@ cooking.recipe1.title = "Juicy Fruitcake";
 
 cooking.recipe1.steps = [];
 
+// STEP 0
 cooking.recipe1.steps[0] = {};
 
 cooking.recipe1.steps[0].instruction = "Prepare tools KNIFE, SMALL BOWL";
