@@ -1,7 +1,11 @@
 cooking.moveMe = function(e) {
     e.preventDefault();
     var orig = e.originalEvent;
-    var top = parseInt(orig.changedTouches[0].pageY);     
+    try{
+        var top = parseInt(orig.changedTouches[0].pageY);     
+    } catch(e) {
+        return false;
+    }
     var left = parseInt(orig.changedTouches[0].pageX);
 
     var topStop = this.getAttribute('topStop'); 
@@ -19,7 +23,8 @@ cooking.moveMe = function(e) {
     console.log(left);
     console.log(minLeftStop);
     if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
-        alert('bingo');
+        $(this).unbind().removeAttr('topStop');
+        $('#' + this.id + 'Target').css('border',0);
     }
 };
 
@@ -54,7 +59,7 @@ cooking.displayLevel = function(recipe,step){
         document.body.appendChild(toolEl);
     }
 
-    $(".tool").bind("touchstart touchmove", cooking.moveMe);
+    $("[topStop]").bind("touchstart touchmove", cooking.moveMe);
 }
 
 cooking.gameStart = (function(){ 
