@@ -123,11 +123,43 @@ cooking.recipe1.steps[3] = {};
 
 cooking.recipe1.steps[3].instruction = "step 3";
 
-cooking.recipe1.steps[3].animation = {
-    image: "cuttingapricotpart3.png",
+cooking.recipe1.steps[3].animation = [];
+
+cooking.recipe1.steps[3].animation[0] = {
+    image: "cuttingapricot.png",
+    size : {
+        "x" : "16",
+        "y" : "15"
+    },
     start : {
         "x" : "40",
         "y" : "80"
     },
-    time : 5000
+    time : 1000
+};
+
+cooking.recipe1.steps[3].animation[1] = {
+    image: "cuttingapricotpart2.png",
+    size : {
+        "x" : "16",
+        "y" : "15"
+    },
+    start : {
+        "x" : "40",
+        "y" : "80"
+    },
+    time : 1000
+};
+
+cooking.recipe1.steps[3].animation[2] = {
+    image: "cuttingapricotpart3.png",
+    size : {
+        "x" : "16",
+        "y" : "15"
+    },
+    start : {
+        "x" : "40",
+        "y" : "80"
+    },
+    time : 1000
 };

@@ -10,7 +10,7 @@
     bottom:0;
     z-index:-100;
 }
-.tool, .toolTarget{
+.tool, .toolTarget, .animation{
     position:absolute;    
 }
 .toolTarget{

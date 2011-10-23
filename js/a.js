@@ -1,3 +1,20 @@
+cooking.displayAnimation = function(animation,step) {   
+    if(animation[step]) {
+        toolEl = document.createElement('img');
+        toolEl.setAttribute('src', 'tools/' + animation[step].image);
+        toolEl.setAttribute('class', 'animation');
+        toolEl.style.top = animation[step].start.y + '%';  
+        toolEl.style.left = animation[step].start.x + '%';  
+        toolEl.style.width = animation[step].size.x + "%" ;  
+        toolEl.style.height = animation[step].size.y + '%';
+        document.body.appendChild(toolEl);
+        var nextStep = step + 1;
+        setTimeout(function(){cooking.displayAnimation(animation,nextStep)}, animation[step].time);
+        return true;
+    }
+    cooking.displayLevelContinue(); 
+}
+
 cooking.moveMe = function(e) {
     e.preventDefault();
     var orig = e.originalEvent;
@@ -27,11 +44,14 @@ cooking.moveMe = function(e) {
     }
 
     if(!$("[topStop]").length) {
-       cooking.displayLevel(cooking.recipe,++cooking.step);         
+       cooking.step++;
+       cooking.displayLevel();         
     }
 };
 
-cooking.displayLevel = function(recipe,step){ 
+cooking.displayLevel = function(){ 
+    step = cooking.step;
+    recipe = cooking.recipe;
     // remove not needed elements
     if(step > 0) {
         prevStep = step - 1;
@@ -44,14 +64,22 @@ cooking.displayLevel = function(recipe,step){
     }
     
     // display animation
-    if(recipe.steps[step].animation) {
+    if(typeof recipe.steps[step].animation == 'object') {
         console.log('display animation');
-    } 
+        animation = recipe.steps[step].animation;
+        cooking.displayAnimation(animation,0);
+        return true;
+    }
+    cooking.displayLevelContinue();
+}
+
+cooking.displayLevelContinue = function(){ 
+    step = cooking.step;
+    recipe = cooking.recipe;
 
     document.getElementById('instruction').innerHTML = recipe.steps[step].instruction;
 
     tools = recipe.steps[step].tools;
-    var toolElement;
     for (var i=0, len=tools.length; i<len; ++i ){
         // tool
         toolEl = document.createElement('img');
@@ -83,7 +111,6 @@ cooking.displayLevel = function(recipe,step){
 
 cooking.gameStart = (function(){
     cooking.recipe = cooking.recipe1;
-    cooking.step = 0;
-
-    cooking.displayLevel(cooking.recipe,cooking.step);
+    cooking.step = 2;
+    cooking.displayLevel();
 })();
