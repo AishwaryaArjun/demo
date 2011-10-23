@@ -11,7 +11,7 @@
     z-index:-100;
 }
 .tool, .toolTarget, .animation{
-    position:absolute;    
+    position:absolute; 
 }
 .toolTarget{
     border: solid 1px white;
