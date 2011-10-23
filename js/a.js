@@ -27,7 +27,7 @@ cooking.moveMe = function(e) {
     }
 
     if(!$("[topStop]").length) {
-       console.log('round end');         
+       cooking.displayLevel(cooking.recipe,++cooking.step);         
     }
 };
 
@@ -65,6 +65,9 @@ cooking.displayLevel = function(recipe,step){
     $("[topStop]").bind("touchstart touchmove", cooking.moveMe);
 }
 
-cooking.gameStart = (function(){ 
-    cooking.displayLevel(cooking.recipe1,0);
+cooking.gameStart = (function(){
+    cooking.recipe = cooking.recipe1;
+    cooking.step = 0;
+
+    cooking.displayLevel(cooking.recipe,cooking.step);
 })();
