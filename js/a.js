@@ -1,3 +1,12 @@
+cooking.moveMe = function(e) {
+    e.preventDefault();
+    var orig = e.originalEvent;
+    $(this).css({
+      top: orig.changedTouches[0].pageY,
+      left: orig.changedTouches[0].pageX
+    });
+};
+
 cooking.displayLevel = function(recipe,step){ 
   
     document.getElementById('instruction').innerHTML = recipe.steps[step].instruction;
@@ -13,7 +22,8 @@ cooking.displayLevel = function(recipe,step){
         toolEl.style.top = tools[i].start.y + '%';  
         toolEl.style.left = tools[i].start.x + '%';  
         toolEl.style.width = tools[i].size.x + "%" ;  
-        toolEl.style.height = tools[i].size.y + '%';  
+        toolEl.style.height = tools[i].size.y + '%';
+        toolEl.addEventListener('click',cooking.moveMe);  
         document.body.appendChild(toolEl);
 
         // target for tool
@@ -27,6 +37,7 @@ cooking.displayLevel = function(recipe,step){
         document.body.appendChild(toolEl);
     }
 
+    $(".tool").bind("touchstart touchmove", cooking.moveMe);
 }
 
 cooking.gameStart = (function(){ 
@@ -35,4 +46,3 @@ cooking.gameStart = (function(){
 
     cooking.displayLevel(cooking.recipe1,0);
 })();
-
