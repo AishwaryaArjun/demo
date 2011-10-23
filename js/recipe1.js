@@ -28,7 +28,7 @@ cooking.recipe1.steps[0].tools[0] = {
         "x" : "50",
         "y" : "44"
     },
-    image: "img/deska.png"
+    image: "deska.png"
 }
 
 cooking.recipe1.steps[0].tools[1] = {
@@ -46,5 +46,5 @@ cooking.recipe1.steps[0].tools[1] = {
         "x" : "2",
         "y" : "8"
     },
-    image: "img/apricot.png"
+    image: "apricot.png"
 }

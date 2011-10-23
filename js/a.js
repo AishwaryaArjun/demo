@@ -20,11 +20,14 @@ cooking.moveMe = function(e) {
       top: top + 'px',
       left: left + 'px'
     });
-    console.log(left);
-    console.log(minLeftStop);
+
     if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
         $(this).unbind().removeAttr('topStop');
         $('#' + this.id + 'Target').css('border',0);
+    }
+
+    if(!$("[topStop]").length) {
+       console.log('round end');         
     }
 };
 
@@ -36,7 +39,7 @@ cooking.displayLevel = function(recipe,step){
     for (var i=0, len=tools.length; i<len; ++i ){
         // tool
         toolEl = document.createElement('img');
-        toolEl.setAttribute('src', tools[i].image);
+        toolEl.setAttribute('src', 'tools/' + tools[i].image);
         toolEl.setAttribute('class', 'tool');
         toolEl.setAttribute('id',tools[i].id);
         toolEl.style.top = tools[i].start.y + '%';  
