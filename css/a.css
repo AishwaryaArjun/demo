@@ -5,7 +5,7 @@
 #table{
     position:fixed;
     height:40%;
-    background:brown;
+    background:black;
     width:100%;
     bottom:0;
     z-index:-100;
@@ -20,4 +20,7 @@
 }
 #instruction{
     text-align:center;
+}
+h1 {
+    font-size:20px;
 }

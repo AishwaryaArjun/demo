@@ -1,3 +1,9 @@
+cooking.gameEnd = function() {
+   $("#instruction, #table, .tool, .animation, .toolTarget").hide(); 
+   $("h1").text(cooking.recipe.gameEnd.text);
+   $("#gameEnd").attr('src','tools/' + cooking.recipe.gameEnd.image); 
+}
+
 cooking.displayAnimation = function(animation,step) {   
     if(animation[step]) {
         toolEl = document.createElement('img');
@@ -52,6 +58,12 @@ cooking.moveMe = function(e) {
 cooking.displayLevel = function(){ 
     step = cooking.step;
     recipe = cooking.recipe;
+
+    if(typeof recipe.steps[step] != 'object') {
+        cooking.gameEnd();
+        return;  
+    }
+
     // remove not needed elements
     if(step > 0) {
         prevStep = step - 1;
@@ -65,11 +77,10 @@ cooking.displayLevel = function(){
     
     // display animation
     if(typeof recipe.steps[step].animation == 'object') {
-        console.log('display animation');
         animation = recipe.steps[step].animation;
         cooking.displayAnimation(animation,0);
         return true;
-    }
+    } 
     cooking.displayLevelContinue();
 }
 
@@ -80,37 +91,44 @@ cooking.displayLevelContinue = function(){
     document.getElementById('instruction').innerHTML = recipe.steps[step].instruction;
 
     tools = recipe.steps[step].tools;
-    for (var i=0, len=tools.length; i<len; ++i ){
-        // tool
-        toolEl = document.createElement('img');
-        toolEl.setAttribute('src', 'tools/' + tools[i].image);
-        toolEl.setAttribute('id',tools[i].id);
-        toolEl.setAttribute('class', 'tool');
-        toolEl.style.top = tools[i].start.y + '%';  
-        toolEl.style.left = tools[i].start.x + '%';  
-        toolEl.style.width = tools[i].size.x + "%" ;  
-        toolEl.style.height = tools[i].size.y + '%';
-        toolEl.setAttribute('topStop',(tools[i].stop.y / 100 * window.innerHeight) + 'px');  
-        toolEl.setAttribute('leftStop',(tools[i].stop.x / 100 * window.innerWidth) + 'px');  
-        toolEl.addEventListener('click',cooking.moveMe);  
-        document.body.appendChild(toolEl);
+    if(typeof tools == 'object') {
+        for (var i=0, len=tools.length; i<len; ++i ){
+            // tool
+            toolEl = document.createElement('img');
+            toolEl.setAttribute('src', 'tools/' + tools[i].image);
+            toolEl.setAttribute('id',tools[i].id);
+            toolEl.setAttribute('class', 'tool');
+            toolEl.style.top = tools[i].start.y + '%';  
+            toolEl.style.left = tools[i].start.x + '%';  
+            toolEl.style.width = tools[i].size.x + "%" ;  
+            toolEl.style.height = tools[i].size.y + '%';
+            toolEl.setAttribute('topStop',(tools[i].stop.y / 100 * window.innerHeight) + 'px');  
+            toolEl.setAttribute('leftStop',(tools[i].stop.x / 100 * window.innerWidth) + 'px');  
+            toolEl.addEventListener('click',cooking.moveMe);  
+            document.body.appendChild(toolEl);
 
-        // target for tool
-        toolEl = document.createElement('div');
-        toolEl.setAttribute('class', 'toolTarget');
-        toolEl.setAttribute('id',tools[i].id + "Target");
-        toolEl.style.top = tools[i].stop.y + '%';  
-        toolEl.style.left = tools[i].stop.x + '%';  
-        toolEl.style.width = tools[i].size.x + "%" ;  
-        toolEl.style.height = tools[i].size.y + '%';  
-        document.body.appendChild(toolEl);
+            // target for tool
+            toolEl = document.createElement('div');
+            toolEl.setAttribute('class', 'toolTarget');
+            toolEl.setAttribute('id',tools[i].id + "Target");
+            toolEl.style.top = tools[i].stop.y + '%';  
+            toolEl.style.left = tools[i].stop.x + '%';  
+            toolEl.style.width = tools[i].size.x + "%" ;  
+            toolEl.style.height = tools[i].size.y + '%';  
+            document.body.appendChild(toolEl);
+        }
+    }
+        else {
+           cooking.step++;
+           cooking.displayLevel();         
     }
 
     $("[topStop]").bind("touchstart touchmove", cooking.moveMe);
 }
 
 cooking.gameStart = (function(){
+   $("#instruction, #table").show(); 
     cooking.recipe = cooking.recipe1;
-    cooking.step = 2;
+    cooking.step = 0;
     cooking.displayLevel();
 })();

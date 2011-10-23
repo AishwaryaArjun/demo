@@ -4,6 +4,12 @@ cooking.recipe1 = {};
 
 cooking.recipe1.title = "Juicy Fruitcake";
 
+cooking.recipe1.gameEnd = {};
+
+cooking.recipe1.gameEnd.text = "Congratulationis! You baked an amazing Juicy Fruitcake";
+
+cooking.recipe1.gameEnd.image = "cake.png";
+
 cooking.recipe1.steps = [];
 
 // STEP 0
