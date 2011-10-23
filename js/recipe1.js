@@ -50,8 +50,8 @@ cooking.recipe1.steps[0].tools[1] = {
 cooking.recipe1.steps[0].tools[2] = {
     id : "knife",
     size : {
-        "x" : "5",
-        "y" : "15"
+        "x" : "15",
+        "y" : "5"
     },
     start : {
         "x" : "80",
@@ -74,13 +74,14 @@ cooking.recipe1.steps[1].instruction = "Put DRIED APRICOT on the CUTTING BOARD";
 cooking.recipe1.steps[1].tools = [];
 
 cooking.recipe1.steps[1].tools[0] =  {
+    id : 'apricot',
     size : {
         "x" : "6",
         "y" : "13"
     },
     start : {
-        "x" : "0",
-        "y" : "0"
+        "x" : "40",
+        "y" : "60"
     },
     stop : {
         "x" : "42",
@@ -89,4 +90,44 @@ cooking.recipe1.steps[1].tools[0] =  {
     image: "apricot.png"
 }
 
-cooking.recipe1.steps[1].animation = {};
+cooking.recipe1.steps[1].remove = ['knife'];
+
+// STEP 2
+cooking.recipe1.steps[2] = {};
+
+cooking.recipe1.steps[2].instruction = "Chop DRIED APRICOT with the KNIFE";
+
+cooking.recipe1.steps[2].tools = [];
+
+cooking.recipe1.steps[2].tools[0] =  {
+    id : "knfie",
+    size : {
+        "x" : "15",
+        "y" : "5"
+    },
+    start : {
+        "x" : "80",
+        "y" : "80"
+    },
+    stop : {
+        "x" : "42",
+        "y" : "82"
+    },
+    image: "knife.png"
+}
+
+cooking.recipe1.steps[1].remove = ['knife','board','apricot'];
+
+// STEP 3
+cooking.recipe1.steps[3] = {};
+
+cooking.recipe1.steps[3].instruction = "step 3";
+
+cooking.recipe1.steps[3].animation = {
+    image: "cuttingapricotpart3.png",
+    start : {
+        "x" : "40",
+        "y" : "80"
+    },
+    time : 5000
+};

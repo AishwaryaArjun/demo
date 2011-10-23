@@ -32,18 +32,25 @@ cooking.moveMe = function(e) {
 };
 
 cooking.displayLevel = function(recipe,step){ 
-    document.getElementById('instruction').innerHTML = recipe.steps[step].instruction;
-
+    // remove not needed elements
     if(step > 0) {
         prevStep = step - 1;
         remove = recipe.steps[prevStep].remove;
-        for (var i=0, len=remove.length; i<len; ++i ){
-            $('#' + remove[i]).remove();
+        if(typeof remove == 'object') {
+            for (var i=0, len=remove.length; i<len; ++i ){
+                $('#' + remove[i]).remove();
+            }
         }
     }
+    
+    // display animation
+    if(recipe.steps[step].animation) {
+        console.log('display animation');
+    } 
+
+    document.getElementById('instruction').innerHTML = recipe.steps[step].instruction;
 
     tools = recipe.steps[step].tools;
-console.log(recipe.steps[step]);
     var toolElement;
     for (var i=0, len=tools.length; i<len; ++i ){
         // tool
@@ -76,7 +83,7 @@ console.log(recipe.steps[step]);
 
 cooking.gameStart = (function(){
     cooking.recipe = cooking.recipe1;
-    cooking.step = 1;
+    cooking.step = 0;
 
     cooking.displayLevel(cooking.recipe,cooking.step);
 })();
