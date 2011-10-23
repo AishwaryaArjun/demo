@@ -22,8 +22,8 @@ cooking.moveMe = function(e) {
     });
 
     if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
-        $(this).unbind().removeAttr('topStop');
-        $('#' + this.id + 'Target').css('border',0);
+        $(this).unbind().removeAttr('topStop').css('z-index',-50);
+        $('#' + this.id + 'Target').remove();
     }
 
     if(!$("[topStop]").length) {
@@ -34,14 +34,23 @@ cooking.moveMe = function(e) {
 cooking.displayLevel = function(recipe,step){ 
     document.getElementById('instruction').innerHTML = recipe.steps[step].instruction;
 
+    if(step > 0) {
+        prevStep = step - 1;
+        remove = recipe.steps[prevStep].remove;
+        for (var i=0, len=remove.length; i<len; ++i ){
+            $('#' + remove[i]).remove();
+        }
+    }
+
     tools = recipe.steps[step].tools;
+console.log(recipe.steps[step]);
     var toolElement;
     for (var i=0, len=tools.length; i<len; ++i ){
         // tool
         toolEl = document.createElement('img');
         toolEl.setAttribute('src', 'tools/' + tools[i].image);
-        toolEl.setAttribute('class', 'tool');
         toolEl.setAttribute('id',tools[i].id);
+        toolEl.setAttribute('class', 'tool');
         toolEl.style.top = tools[i].start.y + '%';  
         toolEl.style.left = tools[i].start.x + '%';  
         toolEl.style.width = tools[i].size.x + "%" ;  
@@ -67,7 +76,7 @@ cooking.displayLevel = function(recipe,step){
 
 cooking.gameStart = (function(){
     cooking.recipe = cooking.recipe1;
-    cooking.step = 0;
+    cooking.step = 1;
 
     cooking.displayLevel(cooking.recipe,cooking.step);
 })();
