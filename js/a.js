@@ -101,6 +101,9 @@ cooking.displayLevelContinue = function(){
             toolEl.style.top = tools[i].start.y + '%';  
             toolEl.style.left = tools[i].start.x + '%';  
             toolEl.style.width = tools[i].size.x + "%" ;  
+            if(typeof tools[i].zindex != 'undefined') {
+                toolEl.style.zIndex = tools[i].zindex; 
+            }
             toolEl.style.height = tools[i].size.y + '%';
             toolEl.setAttribute('topStop',(tools[i].stop.y / 100 * window.innerHeight) + 'px');  
             toolEl.setAttribute('leftStop',(tools[i].stop.x / 100 * window.innerWidth) + 'px');  

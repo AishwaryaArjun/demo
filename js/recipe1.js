@@ -70,6 +70,23 @@ cooking.recipe1.steps[0].tools[2] = {
     image: "knife.png"
 }
 
+cooking.recipe1.steps[0].tools[3] = {
+    id : "bowl",
+    size : {
+        "x" : "10",
+        "y" : "8"
+    },
+    start : {
+        "x" : "20",
+        "y" : "50"
+    },
+    stop : {
+        "x" : "20",
+        "y" : "70"
+    },
+    image: "bowl.png"
+}
+
 cooking.recipe1.steps[0].remove = ['apricot'];
 
 // STEP 1
@@ -93,7 +110,8 @@ cooking.recipe1.steps[1].tools[0] =  {
         "x" : "42",
         "y" : "82"
     },
-    image: "apricot.png"
+    image: "apricot.png",
+    zindex: 3
 }
 
 cooking.recipe1.steps[1].remove = ['knife'];
@@ -122,7 +140,7 @@ cooking.recipe1.steps[2].tools[0] =  {
     image: "knife.png"
 }
 
-cooking.recipe1.steps[1].remove = ['knife','board','apricot'];
+cooking.recipe1.steps[2].remove = ['knife','cuttingboard','apricot'];
 
 // STEP 3
 cooking.recipe1.steps[3] = {};
