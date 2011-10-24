@@ -2,13 +2,18 @@
     margin:0;
     padding:0;
 }
-#table{
+#table, #kitchen{
     position:fixed;
     height:40%;
     background:black;
     width:100%;
     bottom:0;
     z-index:-100;
+}
+#kitchen{
+    height:60%;
+    top:0;
+    background:#eef;
 }
 .tool, .toolTarget, .animation{
     position:absolute; 
@@ -24,3 +29,4 @@
 h1 {
     font-size:20px;
 }
+

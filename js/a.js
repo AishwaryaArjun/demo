@@ -32,21 +32,24 @@ cooking.moveMe = function(e) {
     var left = parseInt(orig.changedTouches[0].pageX);
 
     var topStop = this.getAttribute('topStop'); 
-    var minTopStop = 0.98 * parseInt(topStop);
-    var maxTopStop = 1.02 * parseInt(topStop);
+    var minTopStop = 0.95 * parseInt(topStop);
+    var maxTopStop = 1.15 * parseInt(topStop);
 
     var leftStop = this.getAttribute('leftStop'); 
-    var minLeftStop = 0.98 * parseInt(leftStop);
-    var maxLeftStop = 1.02 * parseInt(leftStop);
+    var minLeftStop = 0.95 * parseInt(leftStop);
+    var maxLeftStop = 1.15 * parseInt(leftStop);
     
-    $(this).css({
-      top: top + 'px',
-      left: left + 'px'
-    });
-
     if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
-        $(this).unbind().removeAttr('topStop').css('z-index',-50);
+        $(this).css({
+          top: topStop,
+          left: leftStop
+        }).unbind().removeAttr('topStop').css('z-index',-50);
         $('#' + this.id + 'Target').remove();
+    } else {
+        $(this).css({
+          top: top + 'px',
+          left: left + 'px'
+        });
     }
 
     if(!$("[topStop]").length) {
