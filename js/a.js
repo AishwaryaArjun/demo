@@ -21,7 +21,7 @@ cooking.displayAnimation = function(animation,step) {
     cooking.displayLevelContinue(); 
 }
 
-cooking.moveMe = function(e) {
+cooking.touchmove = function(e) {
     e.preventDefault();
     var orig = e.originalEvent;
     try{
@@ -32,12 +32,12 @@ cooking.moveMe = function(e) {
     var left = parseInt(orig.changedTouches[0].pageX);
 
     var topStop = this.getAttribute('topStop'); 
-    var minTopStop = 0.95 * parseInt(topStop);
-    var maxTopStop = 1.15 * parseInt(topStop);
+    var minTopStop = 0.98 * parseInt(topStop);
+    var maxTopStop = 1.02 * parseInt(topStop);
 
     var leftStop = this.getAttribute('leftStop'); 
-    var minLeftStop = 0.95 * parseInt(leftStop);
-    var maxLeftStop = 1.15 * parseInt(leftStop);
+    var minLeftStop = 0.98 * parseInt(leftStop);
+    var maxLeftStop = 1.02 * parseInt(leftStop);
     
     if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
         $(this).css({
@@ -57,6 +57,76 @@ cooking.moveMe = function(e) {
        cooking.displayLevel();         
     }
 };
+
+cooking.touchend = function(e) {
+    e.preventDefault();
+    var orig = e.originalEvent;
+    try{
+        var top = parseInt(orig.changedTouches[0].pageY);     
+    } catch(e) {
+        return false;
+    }
+    var left = parseInt(orig.changedTouches[0].pageX);
+
+    var topStop = this.getAttribute('topStop'); 
+    var minTopStop = 0.95 * parseInt(topStop);
+    var maxTopStop = 1.05 * parseInt(topStop);
+    var topStart = this.getAttribute('topStart'); 
+
+    var leftStop = this.getAttribute('leftStop'); 
+    var minLeftStop = 0.95 * parseInt(leftStop);
+    var maxLeftStop = 1.05 * parseInt(leftStop);
+    var leftStart = this.getAttribute('leftStop'); 
+    
+    if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
+        $(this).css({
+          top: topStop,
+          left: leftStop
+        }).unbind().removeAttr('topStop').css('z-index',-50);
+        $('#' + this.id + 'Target').remove();
+    } else {
+        // put back
+        $(this).css({
+          top: topStart,
+          left: leftStart
+        });
+        
+    }
+
+    if(!$("[topStop]").length) {
+       cooking.step++;
+       cooking.displayLevel();         
+    }
+};
+
+cooking.displayLevel = function(){ 
+    step = cooking.step;
+    recipe = cooking.recipe;
+
+    if(typeof recipe.steps[step] != 'object') {
+        cooking.gameEnd();
+        return;  
+    }
+
+    // remove not needed elements
+    if(step > 0) {
+        prevStep = step - 1;
+        remove = recipe.steps[prevStep].remove;
+        if(typeof remove == 'object') {
+            for (var i=0, len=remove.length; i<len; ++i ){
+                $('#' + remove[i]).remove();
+            }
+        }
+    }
+    
+    // display animation
+    if(typeof recipe.steps[step].animation == 'object') {
+        animation = recipe.steps[step].animation;
+        cooking.displayAnimation(animation,0);
+        return true;
+    } 
+    cooking.displayLevelContinue();
+}
 
 cooking.displayLevel = function(){ 
     step = cooking.step;
@@ -108,6 +178,8 @@ cooking.displayLevelContinue = function(){
                 toolEl.style.zIndex = tools[i].zindex; 
             }
             toolEl.style.height = tools[i].size.y + '%';
+            toolEl.setAttribute('topStart',tools[i].start.y + '%');  
+            toolEl.setAttribute('leftStart',tools[i].start.x + '%');  
             toolEl.setAttribute('topStop',(tools[i].stop.y / 100 * window.innerHeight) + 'px');  
             toolEl.setAttribute('leftStop',(tools[i].stop.x / 100 * window.innerWidth) + 'px');  
             toolEl.addEventListener('click',cooking.moveMe);  
@@ -129,7 +201,8 @@ cooking.displayLevelContinue = function(){
            cooking.displayLevel();         
     }
 
-    $("[topStop]").bind("touchstart touchmove", cooking.moveMe);
+    $("[topStop]").bind("touchstart touchmove", cooking.touchmove);
+    $("[topStop]").bind("touchend", cooking.touchend);
 }
 
 cooking.gameStart = (function(){
