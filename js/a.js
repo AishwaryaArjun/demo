@@ -1,3 +1,5 @@
+//llll
+
 cooking.gameEnd = function() {
    $("#instruction, #table, .tool, .animation, .toolTarget").hide(); 
    $("h1").text(cooking.recipe.gameEnd.text);
