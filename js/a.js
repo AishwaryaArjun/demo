@@ -1,7 +1,7 @@
 // body.ontouchmove prevent
 
 cooking.gameEnd = function() {
-   $("#instruction, #table, .tool, .animation, .toolTarget").hide(); 
+   $("#kitchen, #table, .tool, .animation, .toolTarget").hide(); 
    $("h1").text(cooking.recipe.gameEnd.text);
    $("#gameEnd").attr('src','tools/' + cooking.recipe.gameEnd.image); 
 }
