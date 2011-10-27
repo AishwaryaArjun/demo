@@ -1,7 +1,8 @@
 // body.ontouchmove prevent
 
 cooking.gameEnd = function() {
-   $("#kitchen, #table, .tool, .animation, .toolTarget").hide(); 
+   $("#kitchen, #table").hide();
+   $(".tool, .animation, .toolTarget").remove(); 
    $("h1").text(cooking.recipe.gameEnd.text);
    $("#gameEnd").attr('src','tools/' + cooking.recipe.gameEnd.image); 
 }
@@ -152,8 +153,8 @@ cooking.displayLevelContinue = function(){
             toolEl.style.top = tools[i].start.y + '%';  
             toolEl.style.left = tools[i].start.x + '%';  
             toolEl.style.width = tools[i].size.x + "%" ;  
-            if(typeof tools[i].zindex != 'undefined') {
-                toolEl.style.zIndex = tools[i].zindex; 
+            if(typeof tools[i].zIndex != 'undefined') {
+                toolEl.style.zIndex = tools[i].zIndex; 
             }
             toolEl.style.height = tools[i].size.y + '%';
             toolEl.setAttribute('topStart',tools[i].start.y + '%');  
@@ -162,6 +163,9 @@ cooking.displayLevelContinue = function(){
             toolEl.setAttribute('leftStop',(tools[i].stop.x / 100 * window.innerWidth) + 'px');  
             toolEl.addEventListener('click',cooking.moveMe);  
             document.body.appendChild(toolEl);
+    if(typeof tools[i].zIndex != 'undefined') {
+        console.log(document.getElementById(tools[i].id).style.zIndex); 
+    }
 
             // target for tool
             toolEl = document.createElement('div');
@@ -184,7 +188,7 @@ cooking.displayLevelContinue = function(){
 }
 
 cooking.gameStart = (function(){
-   $("#instruction, #table").show(); 
+   $("#kitchen, #table").show(); 
     cooking.recipe = cooking.recipe1;
     cooking.step = 0;
     cooking.displayLevel();

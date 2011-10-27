@@ -111,7 +111,7 @@ cooking.recipe1.steps[1].tools[0] =  {
         "y" : "82"
     },
     image: "apricot.png",
-    zindex: 3
+    zIndex: 3
 }
 
 cooking.recipe1.steps[1].remove = ['knife'];
