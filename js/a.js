@@ -163,9 +163,6 @@ cooking.displayLevelContinue = function(){
             toolEl.setAttribute('leftStop',(tools[i].stop.x / 100 * window.innerWidth) + 'px');  
             toolEl.addEventListener('click',cooking.moveMe);  
             document.body.appendChild(toolEl);
-    if(typeof tools[i].zIndex != 'undefined') {
-        console.log(document.getElementById(tools[i].id).style.zIndex); 
-    }
 
             // target for tool
             toolEl = document.createElement('div');
