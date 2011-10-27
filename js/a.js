@@ -48,7 +48,7 @@ cooking.toolMove = function(e) {
     var minTopStop = parseInt(topStop) - dropMarginY;
     var maxTopStop = parseInt(topStop) + dropMarginY;
 
-    var leftStart = this.getAttribute('leftStop'); 
+    var leftStart = this.getAttribute('leftStart'); 
     var leftStop = this.getAttribute('leftStop'); 
     var minLeftStop = parseInt(leftStop) - dropMarginX;
     var maxLeftStop = parseInt(leftStop) + dropMarginX;
