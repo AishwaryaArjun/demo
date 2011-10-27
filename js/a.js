@@ -1,4 +1,4 @@
-// body.ontouchmove prevent
+//body.ontouchmove = function(e) {e.preventDefault()}
 
 cooking.gameEnd = function() {
    $("#kitchen, #table").hide();
@@ -36,20 +36,22 @@ cooking.toolMove = function(e) {
     }
     var left = parseInt(orig.changedTouches[0].pageX);
 
-    var dropMargin = 0.02;
+    var dropMarginY = cooking.dropMarginY;
+    var dropMarginX = cooking.dropMarginX;
     if(eventType === 'touchend') {
-        dropMargin = 0.05;
+        var dropMarginY = cooking.dropMarginYTouchend;
+        var dropMarginX = cooking.dropMarginXTouchend;
     }
 
     var topStart = this.getAttribute('topStart'); 
-    var topStop = this.getAttribute('topStop'); 
-    var minTopStop = (1 - dropMargin) * parseInt(topStop);
-    var maxTopStop = (1 + dropMargin) * parseInt(topStop);
+    var topStop = parseInt(this.getAttribute('topStop')); 
+    var minTopStop = parseInt(topStop) - dropMarginY;
+    var maxTopStop = parseInt(topStop) + dropMarginY;
 
     var leftStart = this.getAttribute('leftStop'); 
     var leftStop = this.getAttribute('leftStop'); 
-    var minLeftStop = (1 - dropMargin) * parseInt(leftStop);
-    var maxLeftStop = (1 + dropMargin) * parseInt(leftStop);
+    var minLeftStop = parseInt(leftStop) - dropMarginX;
+    var maxLeftStop = parseInt(leftStop) + dropMarginX;
     
     if(top > minTopStop && top < maxTopStop && left > minLeftStop && left < maxLeftStop) {
         $(this).css({
@@ -185,7 +187,13 @@ cooking.displayLevelContinue = function(){
 }
 
 cooking.gameStart = (function(){
-   $("#kitchen, #table").show(); 
+    $("#kitchen, #table").show(); 
+    
+    cooking.dropMarginY = 0.03 * parseInt(window.innerHeight);
+    cooking.dropMarginX = 0.03 * parseInt(window.innerWidth);
+    cooking.dropMarginYTouchend = 3 * cooking.dropMarginY;
+    cooking.dropMarginXTouchend = 3 * cooking.dropMarginX;
+
     cooking.recipe = cooking.recipe1;
     cooking.step = 0;
     cooking.displayLevel();
