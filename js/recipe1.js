@@ -43,8 +43,8 @@ cooking.recipe1.steps[0].tools[1] = {
         "y" : "13"
     },
     start : {
-        "x" : "2",
-        "y" : "8"
+        "x" : "5",
+        "y" : "5"
     },
     stop : {
         "x" : "40",

@@ -1,4 +1,8 @@
-//body.ontouchmove = function(e) {e.preventDefault()}
+window.onload = onLoad;
+
+function onLoad(){
+    document.body.ontouchmove = function(e) {e.preventDefault()}
+}
 
 cooking.gameEnd = function() {
    $("#kitchen, #table").hide();
