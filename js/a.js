@@ -1,7 +1,12 @@
 window.onload = onLoad;
 
 function onLoad(){
-    document.body.ontouchmove = function(e) {e.preventDefault()}
+    document.body.ontouchmove = function(e) {e.preventDefault()};
+	document.body.style.height = (window.innerHeight +100 ) + 'px';
+    setTimeout(function() {
+		window.scrollTo(0, 1);
+		cooking.gameStart() 
+	},100);
 }
 
 cooking.gameEnd = function() {
@@ -201,4 +206,4 @@ cooking.gameStart = (function(){
     cooking.recipe = cooking.recipe1;
     cooking.step = 0;
     cooking.displayLevel();
-})();
+});

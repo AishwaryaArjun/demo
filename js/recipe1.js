@@ -22,8 +22,8 @@ cooking.recipe1.steps[0].tools = [];
 cooking.recipe1.steps[0].tools[0] = {
     id : 'cuttingboard',
     size : {
-        "x" : "16",
-        "y" : "15"
+        "x" : "24",
+        "y" : "22"
     },
     start : {
         "x" : "50",
@@ -124,7 +124,7 @@ cooking.recipe1.steps[2].instruction = "Chop DRIED APRICOT with the KNIFE";
 cooking.recipe1.steps[2].tools = [];
 
 cooking.recipe1.steps[2].tools[0] =  {
-    id : "knfie",
+    id : "knife",
     size : {
         "x" : "15",
         "y" : "5"
@@ -152,8 +152,8 @@ cooking.recipe1.steps[3].animation = [];
 cooking.recipe1.steps[3].animation[0] = {
     image: "cuttingapricot.png",
     size : {
-        "x" : "16",
-        "y" : "15"
+        "x" : "24",
+        "y" : "22"
     },
     start : {
         "x" : "40",
@@ -165,8 +165,8 @@ cooking.recipe1.steps[3].animation[0] = {
 cooking.recipe1.steps[3].animation[1] = {
     image: "cuttingapricotpart2.png",
     size : {
-        "x" : "16",
-        "y" : "15"
+        "x" : "24",
+        "y" : "22"
     },
     start : {
         "x" : "40",
@@ -178,8 +178,8 @@ cooking.recipe1.steps[3].animation[1] = {
 cooking.recipe1.steps[3].animation[2] = {
     image: "cuttingapricotpart3.png",
     size : {
-        "x" : "16",
-        "y" : "15"
+        "x" : "24",
+        "y" : "22"
     },
     start : {
         "x" : "40",
